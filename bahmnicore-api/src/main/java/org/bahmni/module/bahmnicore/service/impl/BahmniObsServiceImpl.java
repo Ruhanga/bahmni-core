@@ -228,7 +228,13 @@ public class BahmniObsServiceImpl implements BahmniObsService {
             observations.addAll(obsDao.getObsByPatientProgramUuidAndConceptNames(patientProgramUuid, Arrays.asList(conceptName), null, ObsDaoImpl.OrderBy.DESC, null, null));
         }
 
-        return omrsObsToBahmniObsMapper.map(filterIgnoredObs(obsIgnoreList,observations), getConceptsByName(conceptNames));
+        System.out.println("Number of Observations from the database before mapper logic :  " + observations.size());
+        
+        Collection<BahmniObservation> bahmniObservations = omrsObsToBahmniObsMapper.map(filterIgnoredObs(obsIgnoreList,observations), getConceptsByName(conceptNames));
+
+        System.out.println("Number of Observations from database after mapper logic  :  " + bahmniObservations.size());
+
+        return bahmniObservations;
     }
 
     @Override

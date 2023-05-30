@@ -108,8 +108,10 @@ public class BahmniObservationsController extends BaseRestController {
             observations = bahmniObsService.getInitialObservationsForPatientProgram(patientProgramUuid, rootConceptNames, obsIgnoreList);
         } else {
             observations = bahmniObsService.getObservationsForPatientProgram(patientProgramUuid, rootConceptNames, obsIgnoreList);
+            System.out.println("Number of Observations from BahmniObsService.getObservationsForPatientProgram :  " + observations.size());
         }
         sendObsToGroovyScript(rootConceptNames, observations);
+        System.out.println("Number of Observations from groovy script :  " + observations.size());
         return observations;
     }
 
